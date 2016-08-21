@@ -4,8 +4,8 @@ using System.Windows.Forms;
 public class frmMain:Form
 {
     private Label lblSignIn;
-    private TextBox textBox1;
-    private TextBox textBox2;
+    private TextBox txtSignIn;
+    private TextBox txtSignOut;
     private Button btnGoIn;
     private Button btnGoOut;
     private Label lblSignOut;
@@ -13,17 +13,16 @@ public class frmMain:Form
     private ColumnHeader clmName;
     private ColumnHeader clmInTime;
     private ColumnHeader clmTotalTime;
-    private Button button1;
-    private Button button2;
-    private PictureBox pictureBox1;
+    private Button btnNewStudent;
+    private PictureBox picKumon;
     #region Windows Code
     private void InitializeComponent()
     {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picKumon = new System.Windows.Forms.PictureBox();
             this.lblSignIn = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtSignIn = new System.Windows.Forms.TextBox();
+            this.txtSignOut = new System.Windows.Forms.TextBox();
             this.btnGoIn = new System.Windows.Forms.Button();
             this.btnGoOut = new System.Windows.Forms.Button();
             this.lblSignOut = new System.Windows.Forms.Label();
@@ -31,20 +30,18 @@ public class frmMain:Form
             this.clmName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmInTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmTotalTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.btnNewStudent = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.picKumon)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // picKumon
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(45, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(392, 125);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.picKumon.Image = ((System.Drawing.Image)(resources.GetObject("picKumon.Image")));
+            this.picKumon.Location = new System.Drawing.Point(45, 12);
+            this.picKumon.Name = "picKumon";
+            this.picKumon.Size = new System.Drawing.Size(392, 125);
+            this.picKumon.TabIndex = 0;
+            this.picKumon.TabStop = false;
             // 
             // lblSignIn
             // 
@@ -57,20 +54,20 @@ public class frmMain:Form
             this.lblSignIn.Text = "SIGN IN";
             this.lblSignIn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txtSignIn
             // 
-            this.textBox1.Location = new System.Drawing.Point(614, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(198, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtSignIn.Location = new System.Drawing.Point(614, 29);
+            this.txtSignIn.Name = "txtSignIn";
+            this.txtSignIn.Size = new System.Drawing.Size(198, 20);
+            this.txtSignIn.TabIndex = 3;
+            this.txtSignIn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
-            // textBox2
+            // txtSignOut
             // 
-            this.textBox2.Location = new System.Drawing.Point(614, 87);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(198, 20);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtSignOut.Location = new System.Drawing.Point(614, 87);
+            this.txtSignOut.Name = "txtSignOut";
+            this.txtSignOut.Size = new System.Drawing.Size(198, 20);
+            this.txtSignOut.TabIndex = 4;
             // 
             // btnGoIn
             // 
@@ -81,6 +78,7 @@ public class frmMain:Form
             this.btnGoIn.TabIndex = 5;
             this.btnGoIn.Text = "GO!";
             this.btnGoIn.UseVisualStyleBackColor = true;
+            this.btnGoIn.Click += new System.EventHandler(this.btnGoIn_Click);
             // 
             // btnGoOut
             // 
@@ -117,7 +115,6 @@ public class frmMain:Form
             this.lsvTable.TabIndex = 12;
             this.lsvTable.UseCompatibleStateImageBehavior = false;
             this.lsvTable.View = System.Windows.Forms.View.Details;
-            this.lsvTable.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // clmName
             // 
@@ -135,43 +132,31 @@ public class frmMain:Form
             this.clmTotalTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.clmTotalTime.Width = 189;
             // 
-            // button1
+            // btnNewStudent
             // 
-            this.button1.Location = new System.Drawing.Point(455, 124);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 52);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "button for dummies";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(593, 124);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(99, 52);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Add new student";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnNewStudent.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewStudent.Location = new System.Drawing.Point(593, 124);
+            this.btnNewStudent.Name = "btnNewStudent";
+            this.btnNewStudent.Size = new System.Drawing.Size(99, 52);
+            this.btnNewStudent.TabIndex = 14;
+            this.btnNewStudent.Text = "Add new student";
+            this.btnNewStudent.UseVisualStyleBackColor = true;
+            this.btnNewStudent.Click += new System.EventHandler(this.button2_Click);
             // 
             // frmMain
             // 
             this.ClientSize = new System.Drawing.Size(994, 457);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnNewStudent);
             this.Controls.Add(this.lsvTable);
             this.Controls.Add(this.lblSignOut);
             this.Controls.Add(this.btnGoOut);
             this.Controls.Add(this.btnGoIn);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtSignOut);
+            this.Controls.Add(this.txtSignIn);
             this.Controls.Add(this.lblSignIn);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picKumon);
             this.Name = "frmMain";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picKumon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,32 +173,7 @@ public class frmMain:Form
         Application.Run(main);
     }
 
-    private void textBox1_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void textBox2_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void pictureBox1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void frmMain_Load(object sender, EventArgs e)
-    {
-
-    }
-
-    private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void button1_Click(object sender, EventArgs e)
+    private void displayTableData()
     {
         String dummyString = "Srinath";
         String dummyTime = "9:59";
@@ -247,11 +207,28 @@ public class frmMain:Form
         Anthony.SubItems.Add(testString2TotalTime);
         lsvTable.Items.Add(Anthony);
         Anthony.BackColor = System.Drawing.Color.Yellow;
+
+        txtSignIn.Clear();
+        txtSignIn.Focus();
     }
 
     private void button2_Click(object sender, EventArgs e)
     {
         frmAdd add = new frmAdd();
         add.Show();
+    }
+
+
+    private void textBox1_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Return)
+        {
+            displayTableData();
+        }
+    }
+
+    private void btnGoIn_Click(object sender, EventArgs e)
+    {
+        displayTableData();
     }
 }
