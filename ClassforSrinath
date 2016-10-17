@@ -1,118 +1,85 @@
-class KumonClass
-{
-    private MySqlConnection connection;
-    private string server;
-    private string database;
-    private string uid;
-    private string password;
+    class KumonTEST
+    {
+        private MySqlConnection connection;
+        private string server;
+        private string database;
+        private string uid;
+        private string password;
 
-    //Constructor
-    public KumonClass()
-    {
-        Initialize();
-	create table kumonsrntest
-	(
-	
-	name VARCHAR(30),
-	age INT,
-	barcode INT,
-	phone_num INT,
-	);
-    }
-
-    //Initialize values
-    private void Initialize()
-    {
-        server = "localhost";
-        database = "kumonsrntest";
-        uid = "username";
-        password = "password";
-        string connectionString;
-        connectionString = "SERVER=" + server + ";" + "DATABASE=" + 
-		database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-        connection = new MySqlConnection(connectionString);
-    }
-
-    //open connection to database
-    private bool OpenConnection()
-    {
-    try
-    {
-        connection.Open();
-        return true;
-    }
-    catch (MySqlException ex)
-    {
-       
-        switch (ex.Number)
+        public KumonTEST()
         {
-            case 0:
-                MessageBox.Show("Cannot connect to server.  Contact administrator");
-                break;
 
-            case 1045:
-                MessageBox.Show("Invalid username/password, please try again");
-                break;
         }
-        return false;
-    }
-    }
 
-    //Close connection
-    private bool CloseConnection()
-    {
-    try
-    {
-        connection.Close();
-        return true;
-    }
-    catch (MySqlException ex)
-    {
-        MessageBox.Show(ex.Message);
-        return false;
-    }
-    }
+        private void Initialize()
+        {
+            server = "localhost";
+            database = "kumonsrntest";
+            uid = txtUsername.Text;
+            password = txtPassword.Text;
+            string connectionString;
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-    //Insert statement
-    public void Insert(string insert)
-    {
-    query = insert
-    //open connection
-    if (this.OpenConnection() == true)
-    {
-        //create command and assign the query and connection from the constructor
-        MySqlCommand cmd = new MySqlCommand(query, connection);
-        
-        //Execute command
-        cmd.ExecuteNonQuery();
+            connection = new MySqlConnection(connectionString);
+        }
 
-        //close connection
-        this.CloseConnection();
+        private bool OpenConnection()
+        {
+            try
+            {
+                connection.Open();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                //When handling errors, you can your application's response based 
+                //on the error number.
+                //The two most common error numbers when connecting are as follows:
+                //0: Cannot connect to server.
+                //1045: Invalid user name and/or password.
+                switch (ex.Number)
+                {
+                    case 0:
+                        MessageBox.Show("Cannot connect to server.  Contact administrator");
+                        break;
+
+                    case 1045:
+                        MessageBox.Show("Invalid username/password, please try again");
+                        break;
+                }
+                return false;
+            }
+        }
+        private bool CloseConnection()
+        {
+            try
+            {
+                connection.Close();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+        public void runCommand(string query) // for insert, delete, update
+        {           
+            //open connection
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //Execute command
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+        }     
+
+
+
     }
-    }
-
-    //Update statement
-    public void Update(string update)
-    {
-    query = update;
-    //Open connection
-    if (this.OpenConnection() == true)
-    {
-        //create mysql command
-        MySqlCommand cmd = new MySqlCommand();
-        //Assign the query using CommandText
-        cmd.CommandText = query;
-        //Assign the connection using Connection
-        cmd.Connection = connection;
-
-        //Execute query
-        cmd.ExecuteNonQuery();
-
-        //close connection
-        this.CloseConnection();
-    }
-    }
-
-}
-}
